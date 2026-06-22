@@ -1,0 +1,7 @@
+.DS_Store
+.vscode/
+pg_data/
+ch_data/
+*.csv
+*.docx
+~$*
