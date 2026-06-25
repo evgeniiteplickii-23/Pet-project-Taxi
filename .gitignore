@@ -5,3 +5,4 @@ ch_data/
 *.csv
 *.docx
 ~$*
+data/
