@@ -7,4 +7,5 @@ ch_data/
 ~$*
 data/
 .env
-
+2_container_dbt/logs/
+2_container_dbt/target/
