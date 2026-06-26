@@ -24,3 +24,9 @@ engine = sqlalchemy.create_engine(
 #загрузка данных в Postgres
 dataset.to_sql(name="yellow_trips", schema="staging", con=engine, if_exists="replace", chunksize=10000)
 taxi_zones.to_sql(name="taxi_zones", schema="staging", con=engine, if_exists="replace")
+
+#метка завершения загрузки для DBT: dbt стартует только после завершения загрузки данных в staging area
+with engine.connect() as conn:
+    conn.execute(sqlalchemy.text("CREATE TABLE IF NOT EXISTS staging.load_complete (loaded_at timestamp)"))
+    conn.execute(sqlalchemy.text("INSERT INTO staging.load_complete VALUES (NOW())"))
+    conn.commit()

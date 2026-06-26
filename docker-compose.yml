@@ -44,8 +44,17 @@ services:
         depends_on:
             - postgres
     
-    #сontainer_dbt:
-        # описание
+    container_dbt:
+        build: ./2_container_dbt
+        container_name: 2_container_dbt
+        environment:
+            DB_USER: admin
+            DB_PASSWORD: admin
+        volumes:
+            - ./2_container_dbt:/dbt
+        depends_on:
+            postgres:
+                condition: service_healthy
     
     #container_python2clickhouse:
         # описание

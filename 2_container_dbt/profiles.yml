@@ -1,0 +1,12 @@
+taxi_dwh:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: postgres
+      port: 5432
+      dbname: taxi_db
+      user: "{{ env_var('DB_USER') }}"
+      password: "{{ env_var('DB_PASSWORD') }}"
+      schema: dwh
+      threads: 1

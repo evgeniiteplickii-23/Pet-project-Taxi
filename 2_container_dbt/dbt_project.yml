@@ -1,0 +1,11 @@
+name: taxi_dwh
+version: '1.0.0'
+profile: taxi_dwh
+
+model-paths: ["models"]
+
+models:
+  taxi_dwh:
+    dwh:
+      +materialized: table
+      +schema: dwh
