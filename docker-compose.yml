@@ -1,0 +1,62 @@
+services:
+    postgres:
+        image: postgres:16.0
+        container_name: postgres
+        environment:
+         POSTGRES_PASSWORD: admin
+         POSTGRES_USER: admin
+         POSTGRES_DB: taxi_db
+        ports:
+           - "5432:5432"
+        healthcheck:
+           test: ["CMD", "pg_isready", "-U", "admin", "-d", "taxi_db"]
+           interval: 5s
+           timeout: 5s
+           retries: 5
+        volumes:
+          - db_data:/var/lib/postgresql/data
+          - ./1_container_extraction/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+    pgadmin:
+        image: dpage/pgadmin4
+        container_name: pgadmin
+        environment:
+            PGADMIN_DEFAULT_EMAIL: "GvV9o@example.com"
+            PGADMIN_DEFAULT_PASSWORD: "admin"
+        ports:
+            - "5050:80"
+        depends_on:
+            - postgres
+        restart: always
+        volumes:
+            - pgadmin:/var/lib/pgadmin
+
+
+    container_extraction:
+        build: ./1_container_extraction
+        container_name: 1_container_extraction
+        environment:
+            DB_NAME: taxi_db
+            DB_USER: admin
+            DB_PASSWORD: admin
+        volumes:    
+            - ./data:/data
+        depends_on:
+            - postgres
+    
+    #сontainer_dbt:
+        # описание
+    
+    #container_python2clickhouse:
+        # описание
+    
+    #clickhouse:
+        # описание
+    
+    #container_python2tableau:
+        # описание
+
+volumes:
+    db_data:
+    pgadmin:
+

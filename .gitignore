@@ -6,3 +6,5 @@ ch_data/
 *.docx
 ~$*
 data/
+.env
+
