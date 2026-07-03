@@ -86,8 +86,14 @@ services:
             clickhouse:
                 condition: service_healthy
     
-    #container_python2tableau:
-        # описание
+    container_python2tableau:
+        build: ./4_container_python2tableau
+        container_name: 4_container_python2tableau
+        depends_on:
+            clickhouse:
+                condition: service_healthy
+        volumes:
+            - ./data/tableau:/data/tableau
 
 volumes:
     db_data:
