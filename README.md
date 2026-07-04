@@ -38,14 +38,28 @@ Source: [NYC TLC Yellow Taxi Trip Records](https://www.nyc.gov/site/tlc/about/tl
 ## How to Run
 
 ### Prerequisites
-- Docker Desktop
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running
 - 4GB RAM available
+- [Tableau Public](https://public.tableau.com/en-us/s/download) (free) — to explore dashboards locally
 
-### Start the pipeline
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/evgeniiteplickii-23/Pet-project-Taxi.git
 cd Pet-project-Taxi
+```
+
+### 2. Download the source data
+
+Download the NYC Yellow Taxi trip file for January 2026 from the [NYC TLC website](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page) and place it into the `data/` folder:
+
+```
+data/yellow_tripdata_2026-01.parquet
+```
+
+### 3. Run the pipeline
+
+```bash
 docker-compose up --build
 ```
 
@@ -56,7 +70,21 @@ The pipeline runs automatically in sequence:
 4. Python loads marts into ClickHouse
 5. Python exports marts to CSV files in `data/tableau/`
 
-### Verify ClickHouse data
+Wait until all containers finish — takes ~3-5 minutes.
+
+### 4. Explore the data in Tableau
+
+Open Tableau Public → **Connect to Data** → **Text file** → select any CSV from `data/tableau/`:
+
+| File | Contents |
+|------|----------|
+| `mart_operations.csv` | Trip volume by zone, hour, day of week |
+| `mart_finance.csv` | Revenue, fares, tips by vendor and payment type |
+| `mart_service_quality.csv` | Tip rate, distance, passenger count by zone |
+
+Or view the published dashboard directly: [Taxi Operations Analysis →](https://public.tableau.com/views/mart_operations/Dashboard?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+
+### Verify ClickHouse data (optional)
 
 Open `http://localhost:8123/play` (user: `admin`, password: `admin`):
 
