@@ -85,3 +85,7 @@ SELECT * FROM taxi_marts.mart_operations LIMIT 10;
 - **ClickHouse 24.3** — analytical data store
 - **Docker / Docker Compose** — containerization
 - **Tableau Public** — visualization
+
+## Dashboard
+
+[Taxi Operations Analysis](https://public.tableau.com/views/mart_operations/Dashboard?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link) — interactive dashboard on Tableau Public

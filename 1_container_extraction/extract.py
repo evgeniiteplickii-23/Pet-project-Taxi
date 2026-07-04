@@ -8,7 +8,7 @@ time.sleep(10)
 
 #выгрузка данных в переменные
 dataset = pd.read_parquet("/data/yellow_tripdata_2026-01.parquet")
-dataset = dataset.head(100000) #читаем только 100к строк, а не 3.7 млн из файла
+dataset = dataset.sample(n=100000, random_state=42) #случайная выборка из 3.7 млн строк
 taxi_zones = pd.read_csv("/data/taxi_zone_lookup.csv")
 
 #установка соединения с Postgres. Чтобы не раскрывать логин и пароль - берем их из env (виртуального окружения)
